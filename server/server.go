@@ -58,6 +58,10 @@ func NewRanServer(c Config, logger *log.Logger) *RanServer {
 
 func (this *RanServer) serveHTTP(w http.ResponseWriter, r *http.Request) {
 
+    if r.URL.String() == "/exit" {
+        os.Exit(0)
+    }    
+
     requestId := string(getRequestId(r.URL.String()))
 
     w.Header().Set("X-Request-Id", requestId)
